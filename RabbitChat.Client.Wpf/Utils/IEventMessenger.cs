@@ -2,6 +2,9 @@ namespace RabbitChat.Client.Wpf.Utils
 {
     using System;
 
+    /// <summary>
+    /// The event messenger interface.
+    /// </summary>
     public interface IEventMessenger
     {
         /// <summary>

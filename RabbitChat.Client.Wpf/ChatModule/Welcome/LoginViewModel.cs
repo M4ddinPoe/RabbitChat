@@ -8,10 +8,13 @@
 
     using RabbitChat.Client.Wpf.ChatModule.ContactList;
     using RabbitChat.Client.Wpf.ChatModule.EventMessages;
-    using RabbitChat.Client.Wpf.Model;
     using RabbitChat.Client.Wpf.Service;
     using RabbitChat.Client.Wpf.Utils;
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="Prism.Mvvm.BindableBase" />
     public class LoginViewModel : BindableBase
     {
         private string name;

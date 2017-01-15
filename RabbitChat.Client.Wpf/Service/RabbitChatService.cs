@@ -13,6 +13,10 @@
     using RabbitMQ.Client;
     using RabbitMQ.Client.Events;
 
+    /// <summary>
+    /// The Rabbit Chat service.
+    /// </summary>
+    /// <seealso cref="System.IDisposable" />
     public class RabbitChatService : IDisposable
     {
         /// <summary>
@@ -62,6 +66,12 @@
         /// </value>
         private IModel ReceiveChannel { get; }
 
+        /// <summary>
+        /// Gets or sets the name of the queue.
+        /// </summary>
+        /// <value>
+        /// The name of the queue.
+        /// </value>
         private string QueueName { get; set; }
 
         /// <summary>
@@ -93,6 +103,11 @@
             this.ReceiveMessagesAsync();
         }
 
+        /// <summary>
+        /// Creates the chat.
+        /// </summary>
+        /// <param name="contact">The contact.</param>
+        /// <returns></returns>
         public Chat CreateChat(Contact contact)
         {
             var chat = new Chat(this.Connection, contact);
@@ -141,6 +156,9 @@
             this.ReceiveChannel.BasicConsume(queue: this.QueueName, noAck: true, consumer: consumer);
         }
 
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose()
         {
             this.ReceiveChannel.Dispose();

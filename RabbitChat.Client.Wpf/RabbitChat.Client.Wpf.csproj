@@ -134,7 +134,6 @@
       <DependentUpon>ContactListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChatModule\ContactList\ContactListViewModel.cs" />
-    <Compile Include="ChatModule\EventMessages\InitializeChatEventMessage.cs" />
     <Compile Include="ChatModule\EventMessages\LoginEventMessage.cs" />
     <Compile Include="ChatModule\Welcome\RegistrationView.xaml.cs">
       <DependentUpon>RegistrationView.xaml</DependentUpon>

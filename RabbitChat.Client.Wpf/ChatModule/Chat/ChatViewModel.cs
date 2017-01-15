@@ -4,38 +4,35 @@
 
     using System.Windows.Input;
 
-    using Microsoft.Practices.Prism.Mvvm;
+    using Prism.Interactivity.InteractionRequest;
+    using Prism.Mvvm;
 
     using Prism.Commands;
 
-    using RabbitChat.Client.Wpf.ChatModule.EventMessages;
     using RabbitChat.Client.Wpf.Model;
     using RabbitChat.Client.Wpf.Service;
-    using RabbitChat.Client.Wpf.Utils;
 
     /// <summary>
     /// 
     /// </summary>
     /// <seealso cref="Microsoft.Practices.Prism.Mvvm.BindableBase" />
-    public class ChatViewModel : BindableBase
+    public class ChatViewModel : BindableBase, IInteractionRequestAware
     {
         private string messages;
 
         private string messageToSend;
 
+        private InitializeChatNotification initializeChatNotification;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ChatViewModel" /> class.
         /// </summary>
-        /// <param name="eventMessenger">The event messenger.</param>
         /// <param name="rabbitChatService">The rabbit chat service.</param>
-        public ChatViewModel(IEventMessenger eventMessenger, RabbitChatService rabbitChatService)
+        public ChatViewModel(RabbitChatService rabbitChatService)
         {
-            this.EventMessenger = eventMessenger;
             this.RabbitChatService = rabbitChatService;
             this.SendCommand = new DelegateCommand(this.OnSendMessage);
             this.CloseCommand = new DelegateCommand(this.OnClose);
-
-            this.EventMessenger.SubscribeEvent<InitializeChatEventMessage>(this.OnInitializeChat);
         }
 
         /// <summary>
@@ -93,14 +90,6 @@
         }
 
         /// <summary>
-        /// Gets the event messenger.
-        /// </summary>
-        /// <value>
-        /// The event messenger.
-        /// </value>
-        private IEventMessenger EventMessenger { get; }
-
-        /// <summary>
         /// Gets the rabbit chat service.
         /// </summary>
         /// <value>
@@ -115,6 +104,36 @@
         /// The chat.
         /// </value>
         private Chat Chat { get; set; }
+
+        /// <summary>
+        /// The <see cref="T:Prism.Interactivity.InteractionRequest.INotification" /> passed when the interaction request was raised.
+        /// </summary>
+        public INotification Notification
+        {
+            get
+            {
+                return this.initializeChatNotification;
+            }
+
+            set
+            {
+                var notification = value as InitializeChatNotification;
+
+                if (notification != null)
+                {
+                    this.initializeChatNotification = notification;
+                    this.OnPropertyChanged(() => this.Notification);
+
+                    this.Chat = notification.Chat;
+                    this.Chat.MessageReceived += this.ChatOnMessageReceived;
+                }
+            }
+        }
+
+        /// <summary>
+        /// An <see cref="T:System.Action" /> that can be invoked to finish the interaction.
+        /// </summary>
+        public Action FinishInteraction { get; set; }
 
         /// <summary>
         /// Called when message is send.
@@ -136,21 +155,6 @@
         private void AddMessageToFlow(string name, string message)
         {
             this.Messages += $"{name}: {message}{Environment.NewLine}";
-        }
-
-        /// <summary>
-        /// Called when [initialize chat].
-        /// </summary>
-        /// <param name="initializeChatEventMessage">The initialize chat event message.</param>
-        private void OnInitializeChat(InitializeChatEventMessage initializeChatEventMessage)
-        {
-            if (this.Chat != null)
-            {
-                return;
-            }
-
-            this.Chat = initializeChatEventMessage.Chat;
-            this.Chat.MessageReceived += this.ChatOnMessageReceived;
         }
 
         /// <summary>

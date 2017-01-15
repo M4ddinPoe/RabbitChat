@@ -1,7 +1,15 @@
 ﻿namespace RabbitChat.Client.Wpf.Model
 {
+    /// <summary>
+    /// Represents a chat message.
+    /// </summary>
     public class Message
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Message"/> class.
+        /// </summary>
+        /// <param name="contact">The contact.</param>
+        /// <param name="messageText">The message text.</param>
         public Message(Contact contact, string messageText)
         {
             this.Contact = contact;

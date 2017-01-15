@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RabbitChat.Client.Wpf.Utils
+﻿namespace RabbitChat.Client.Wpf.Utils
 {
     /// <summary>
     /// Handles the navigation.

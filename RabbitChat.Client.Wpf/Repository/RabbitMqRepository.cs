@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace RabbitChat.Client.Wpf.Repository
+﻿namespace RabbitChat.Client.Wpf.Repository
 {
-    using RabbitChat.Client.Wpf.Model;
+    using System;
 
+    using RabbitChat.Client.Wpf.Model;
     using RabbitMQ.Client;
 
     public class RabbitMqRepository

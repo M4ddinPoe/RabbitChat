@@ -28,6 +28,7 @@
         /// </summary>
         /// <param name="eventMessenger">The event messenger.</param>
         /// <param name="rabbitChatService">The rabbit chat service.</param>
+        /// <param name="contactService">The contact service.</param>
         public ContactListViewModel(IEventMessenger eventMessenger, RabbitChatService rabbitChatService, ContactService contactService)
         {
             this.EventMessenger = eventMessenger;
@@ -191,8 +192,7 @@
                 Application.Current.Dispatcher.Invoke(
                     () =>
                         {
-                            this.InitializeChatNotificationRequest.Raise(new InitializeChatNotification { Title = chat.Contact.NickName });
-                            this.EventMessenger.PublishEvent(new InitializeChatEventMessage(chat.Contact) { Chat = chat });
+                            this.InitializeChatNotificationRequest.Raise(new InitializeChatNotification(chat) { Title = chat.Contact.NickName });
                         });
                 
             }

@@ -160,7 +160,7 @@
             var collection = database.GetCollection<Contact>(CollectionName);
             var filter = this.CreateFilter("_id", contact.Id);
 
-            var update = Builders<Contact>.Update.Push<Contact>(e => e.Contacts, contactToAdd);
+            var update = Builders<Contact>.Update.Push(e => e.Contacts, contactToAdd);
 
             await collection.FindOneAndUpdateAsync(filter, update);
         }

@@ -17,6 +17,10 @@
     using RabbitChat.Client.Wpf.Service;
     using RabbitChat.Client.Wpf.Utils;
 
+    /// <summary>
+    /// Bootstraps the project.
+    /// </summary>
+    /// <seealso cref="Prism.Autofac.AutofacBootstrapper" />
     public class Bootstrapper : AutofacBootstrapper
     {
         /// <summary>
@@ -52,7 +56,7 @@
         /// Configures the <see cref="T:Autofac.ContainerBuilder" />.
         /// May be overwritten in a derived class to add specific type mappings required by the application.
         /// </summary>
-        /// <param name="builder"></param>
+        /// <param name="builder">The IoC container builder.</param>
         protected override void ConfigureContainerBuilder(ContainerBuilder builder)
         {
             base.ConfigureContainerBuilder(builder);
