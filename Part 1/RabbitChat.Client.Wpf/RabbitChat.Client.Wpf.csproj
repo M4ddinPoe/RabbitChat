@@ -142,6 +142,7 @@
     <Compile Include="ChatModule\Welcome\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Repository\ContactRepository.cs" />
     <Compile Include="Repository\MongoDbRepository.cs" />
     <Compile Include="Service\Chat.cs" />
     <Compile Include="Model\Contact.cs" />

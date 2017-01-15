@@ -1,0 +1,22 @@
+﻿<Window xmlns:Chat="clr-namespace:RabbitChat.Client.Wpf"  x:Class="RabbitChat.Client.Wpf.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RabbitChat.Client.Wpf"
+        xmlns:regions="http://prismlibrary.com/"
+        mc:Ignorable="d"
+        Title="Shell" Height="600" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Background="DodgerBlue">
+            <TextBlock VerticalAlignment="Center" TextAlignment="Center" Foreground="White" FontSize="24" FontStyle="Italic">Rabbit Chat</TextBlock>
+        </Grid>
+        
+        <ContentControl Grid.Row="1" Name="MainRegion" regions:RegionManager.RegionName="MainRegion" />
+    </Grid>
+</Window>
