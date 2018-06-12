@@ -14,7 +14,7 @@ node('master'){
     }
     stage('Build') {
         echo 'MsBuild'
-        bat "msbuild.exe RabbitChat.Client.Wpf/RabbitChat.Client.Wpf.csproj /p:PublishProfile=release;TargetFrameworkVersion=v4.6.1;DeployOnBuild=true;"
+        bat "msbuild.exe RabbitChat.Client.Wpf/RabbitChat.Client.Wpf.csproj /p:PublishProfile=release /p:TargetFrameworkVersion=v4.6.1 /p:DeployOnBuild=true"
     }
     stage('PostBuild') {
         echo 'Send Mail'
