@@ -7,7 +7,7 @@ node('master'){
         //url: 'ssh://git@git.steag.de:7999/trad/tradechangelog.git'
 
         echo 'restore NuGet Packages'
-        bat 'nuget restore RabbitChat.sln'
+        bat 'nuget.exe restore RabbitChat.sln'
     }
     stage ('CreateAndConfigureWebApp') {
         //def msg = powershell(returnStdout: true, script: 'C:\PowerShell_Tools\Jenkins\./Create_and_Configure_Webapp.ps1')
