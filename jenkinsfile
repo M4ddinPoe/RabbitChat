@@ -1,5 +1,5 @@
 pipeline {
-    node('master'){
+    stages{
 
         stage('Checkout') {
             echo 'checkout repository'
