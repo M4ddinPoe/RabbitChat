@@ -3,17 +3,14 @@ node('master'){
     stage('Checkout') {
         echo 'checkout repository'
         checkout scm
-        //git branch: 'master',
-        //credentialsId: '12345-1234-4696-af25-123455',
-        //url: 'ssh://git@git.steag.de:7999/trad/tradechangelog.git'
 
         echo 'restore NuGet Packages'
         bat 'nuget.exe restore RabbitChat.sln'
     }
     stage ('CreateAndConfigureWebApp') {
-        //def msg = powershell(returnStdout: true, script: 'C:\PowerShell_Tools\Jenkins\./Create_and_Configure_Webapp.ps1')
-        //echo msg
         echo 'Call Powershell'
+        def msg = powershell(returnStdout: true, script: 'C:\scripts\ps_test.ps1')
+        echo msg
     }
     stage('Build') {
         //bat "\"${tool 'MSBuild'}\" backend/TradeChangelog/Application.WebApp/Application.WebApp.csproj /p:PublishProfile=Dev_Environment;TargetFrameworkVersion=v4.6.1;DeployOnBuild=true;Password=${PASS_DEPLOYMENT};Username=${USER_DEPLOYMENT}"
