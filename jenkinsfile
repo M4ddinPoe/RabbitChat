@@ -19,4 +19,18 @@ node('master'){
     stage('PostBuild') {
         echo 'Send Mail'
     }
+    post {
+        failure {
+            script {
+                currentBuild.result = 'FAILURE'
+            }
+        }
+
+        always {
+            step([$class: 'Mailer',
+                notifyEveryUnstableBuild: true,
+                recipients: "martin.poepel@5minds.de",
+                sendToIndividuals: true])
+        }
+    }
 }
